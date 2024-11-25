@@ -49,10 +49,9 @@ def main():
 
     # Display the captured photo if available
     if picture:
-        st.image(picture, caption="Captured Photo")
         st.success("Photo captured successfully!")
-
-        # Convert the photo to bytes
+        # Load the picture into a PIL Image
+        img = Image.open(BytesIO(picture.getvalue()))
         img_byte_arr = BytesIO()
         img.save(img_byte_arr, format='PNG')
         img_bytes = img_byte_arr.getvalue()
