@@ -1,1 +1,4 @@
 streamlit==1.40.1  
+firebase-admin==6.5.0
+ultralytics==8.3.37
+roboflow==1.1.49
