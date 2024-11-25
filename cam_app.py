@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, ClientSettings
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 import cv2
 import numpy as np
 
@@ -33,10 +33,8 @@ def main():
     webrtc_ctx = webrtc_streamer(
         key="camera",
         mode="sendrecv",
-        client_settings=ClientSettings(
-            rtc_configuration=RTC_CONFIGURATION,
-            media_stream_constraints={"video": True, "audio": False},
-        ),
+        rtc_configuration=RTC_CONFIGURATION,
+        media_stream_constraints={"video": True, "audio": False},
         video_transformer_factory=VideoProcessor,
     )
 
