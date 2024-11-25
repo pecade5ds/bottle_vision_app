@@ -1,19 +1,19 @@
 import streamlit as st
 
-# Función principal de la aplicación
+# Main function for the application
 def main():
-    st.title("Captura de Foto desde la Cámara 📸")
+    st.title("Capture a Photo from the Camera 📸")
 
-    # Opción para habilitar o deshabilitar la cámara
-    enable_camera = st.checkbox("Habilitar cámara")
+    # Option to enable or disable the camera
+    enable_camera = st.checkbox("Enable Camera")
 
-    # Widget para capturar la foto
-    picture = st.camera_input("Toma una foto", disabled=not enable_camera)
+    # Widget to capture the photo
+    picture = st.camera_input("Take a photo", disabled=not enable_camera)
 
-    # Mostrar la foto capturada si está disponible
+    # Display the captured photo if available
     if picture:
-        st.image(picture, caption="Foto Capturada")
-        st.success("¡Foto capturada correctamente!")
+        st.image(picture, caption="Captured Photo")
+        st.success("Photo captured successfully!")
 
 if __name__ == "__main__":
     main()
