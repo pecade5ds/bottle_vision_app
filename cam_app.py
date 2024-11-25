@@ -39,7 +39,7 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
 
 # Main function for the application
 def main():
-    st.title("Capture a Photo from the Camera 📸")
+    st.title("Danone - Watters Bottle Vision 📸")
 
     # Option to enable or disable the camera
     enable_camera = st.checkbox("Enable Camera")
