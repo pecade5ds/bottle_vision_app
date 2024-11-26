@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_js_eval import streamlit_js_eval
+import geocoder
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
 import base64
@@ -39,18 +39,16 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
     return result
 
 def get_lat_lon():
-    try:
-        response = requests.get('http://ip-api.com/json')
-        data = response.json()
-
-        if data['status'] == 'fail':
-            st.error("Could not retrieve location from IP address.")
-            return None, None
-        
-        lat = data.get('lat', 'Unavailable')
-        lon = data.get('lon', 'Unavailable')
-        return lat, lon
+    # Use geocoder to get the location based on IP
+    g = geocoder.ip('me')
     
+    if g.ok:
+        lat = g.latlng[0]  # Latitude
+        lon = g.latlng[1]  # Longitude
+        return lat, lon
+    else:
+        st.error("Could not retrieve location from IP address.")
+        return None, None
     except Exception as e:
         st.error(f"Error occurred while fetching location: {str(e)}")
         return None, None
