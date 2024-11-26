@@ -56,6 +56,21 @@ def get_lat_lon():
 # Main function for the application
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
+    # Custom horizontal divider
+    st.markdown(
+        """
+        <style>
+        hr {
+            border: 2px solid #FF6347;
+            border-radius: 5px;
+        }
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
+    
+    # Example of using a custom divider
+    st.markdown("---")
 
     # Option to enable or disable the camera
     enable_camera = st.checkbox("Enable Camera")
