@@ -115,7 +115,7 @@ def main():
         st.success("Photo captured successfully!")
 
         # Predict using YOLO model
-        roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(BytesIO(picture.getvalue()))) , confidence=50, overlap=30)
+        # roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(BytesIO(picture.getvalue()))) , confidence=50, overlap=30)
         # robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         with st.spinner("Retrieving your location..."):
