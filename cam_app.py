@@ -105,7 +105,7 @@ def main():
                     #     "predictions": robo_detected_label_counts_dict,
                     #     "post_code": postal_code,
                     #     "store_name": store_name,
-                    #     "coordinates": f"{lat}, {lon}" if lat and lon else "Location unavailable",
+                    #     "coordinates": lat_long_vec,
                     #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
                     # })
                     doc_ref = [0,1]
