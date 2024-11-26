@@ -1,5 +1,4 @@
 import streamlit as st
-import geocoder
 import firebase_admin
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
@@ -13,11 +12,11 @@ from roboflow import Roboflow
 # Firebase credentials
 cred = credentials.Certificate('./credentials/object-detection-credentials.json')
 
-if not firebase_admin._apps:
-    initialize_app(cred)
+# if not firebase_admin._apps:
+#     initialize_app(cred)
 
-# # Connect to Firestore
-db = firestore.client()
+# # # Connect to Firestore
+# db = firestore.client()
 
 with open('./credentials/robo_credentials.json', 'r') as json_file:
     robo_cred = json.load(json_file)
@@ -44,20 +43,7 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
         class_name = item[class_var]
         result[class_name] = result.get(class_name, 0) + 1
     return result
-
-# def get_lat_lon():
-#     # Use geocoder to get the location based on IP
-#     g = geocoder.ip('me')
     
-#     if g.ok:
-#         lat = g.latlng[0]  # Latitude
-#         lon = g.latlng[1]  # Longitude
-#         return lat, lon
-#     else:
-#         st.error("Could not retrieve location from IP address.")
-#         return None, None
-
-# Main function for the application
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
     # Custom horizontal divider
@@ -100,9 +86,6 @@ def main():
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         st.markdown("---")
-
-        # get coordinates
-        # lat_long_vec = get_lat_lon()
         
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
@@ -125,24 +108,23 @@ def main():
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
 
         if st.button("Save Predictions"):
-            if not postal_code or not store_name:
-                st.warning("Please fill in all fields before saving the predictions.")
-            else:
-                try:
-                    # Save predictions to Firebase
-                    doc_ref = db.collection(db_schema_name_str).add({
-                        "predictions": robo_detected_label_counts_dict,
-                        "post_code": postal_code,
-                        "shelf id": shelf_id,
-                        "store_name": store_name,
-                        # "coordinates": lat_long_vec,
-                        "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
-                    })
+            try:
+                # Save predictions to Firebase
+                # doc_ref = db.collection(db_schema_name_str).add(
+                #     {
+                #     "predictions": robo_detected_label_counts_dict,
+                #     "post_code": postal_code,
+                #     "shelf id": shelf_id,
+                #     "store_name": store_name,
+                #     # "coordinates": lat_long_vec,
+                #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
+                # }
+                # )
 
-                    st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
+                # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
 
-                except Exception as e:
-                    st.error(f"An error occurred while saving predictions: {e}")
+            except Exception as e:
+                st.error(f"An error occurred while saving predictions: {e}")
 
 if __name__ == "__main__":
     main()
