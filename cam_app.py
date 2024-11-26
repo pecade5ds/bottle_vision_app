@@ -150,17 +150,17 @@ def main():
         if st.button("Save Predictions"):
             pass
             # try:
-                # Save predictions to Firebase
-                # doc_ref = db.collection(db_schema_name_str).add(
-                #     {
-                #     "predictions": robo_detected_label_counts_dict,
-                #     "post_code": postal_code,
-                #     "shelf id": shelf_id,
-                #     "store_name": store_name,
-                #     # "coordinates": (lat, lon),
-                #     "photo_base64": base64.b64encode(picture).decode("utf-8"),
-                # }
-                # )
+                Save predictions to Firebase
+                doc_ref = db.collection(db_schema_name_str).add(
+                    {
+                    "predictions": robo_detected_label_counts_dict,
+                    "post_code": postal_code,
+                    "shelf id": shelf_id,
+                    "store_name": store_name,
+                    # "coordinates": (lat, lon),
+                    "photo_base64": base64.b64encode(picture).decode("utf-8"),
+                }
+                )
 
                 # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
 
