@@ -16,10 +16,11 @@ cred = credentials.Certificate('./credentials/object-detection-credentials.json'
 # # Init credentials
 # initialize_app(cred)
 
-if not firebase_admin._apps:
+try:
     initialize_app(cred)
-
-db = firestore.client()
+    db = firestore.client()
+except:
+    pass
 
 # # Connect to Firestore
 # db = firestore.client()
