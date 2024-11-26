@@ -125,7 +125,7 @@ def main():
         st.markdown("---")
         
         # Show detected labels and counts
-        st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
+        # st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
         
         # Section to save predictions in Firebase
         st.subheader("Save Predictions to Firebase")
