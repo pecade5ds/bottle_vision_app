@@ -24,6 +24,12 @@ rf = Roboflow(api_key=fb_api_key)
 project = rf.workspace().project(project)
 model_roboflow = project.version(version_str).model
 
+# Init credentials
+firebase_admin.initialize_app(cred)
+
+# Connect to Firestore
+db = firestore.client()
+
 # Models Initialization
 yolo_models_dict = {
     # "custom_model": YOLO("/content/drive/MyDrive/Colab Notebooks/Data/best.pt"),
@@ -116,7 +122,6 @@ def main():
 
         with col3:
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
-        
 
         if st.button("Save Predictions"):
             if not postal_code or not store_name:
@@ -124,7 +129,7 @@ def main():
             else:
                 try:
                     # Save predictions to Firebase
-                    doc_ref = db.collection("predictions").add({
+                    doc_ref = db.collection(db_schema_name_str).add({
                         "predictions": robo_detected_label_counts_dict,
                         "post_code": postal_code,
                         "shelf id": shelf_id,
