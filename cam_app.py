@@ -49,7 +49,7 @@ def get_lat_lon():
     else:
         st.error("Could not retrieve location from IP address.")
         return None, None
-    except Exception as e:
+    except:
         st.error(f"Error occurred while fetching location: {str(e)}")
         return None, None
 
