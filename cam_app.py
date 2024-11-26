@@ -18,7 +18,6 @@ cred = credentials.Certificate('./credentials/object-detection-credentials.json'
 
 try:
     initialize_app(cred)
-    db = firestore.client()
 except:
     pass
 
@@ -81,6 +80,9 @@ def main():
     
     # Example of using a custom divider
     st.markdown("---")
+
+    # Cliente fire store
+    db = firestore.client()
 
     # Option to enable or disable the camera
     enable_camera = st.checkbox("Enable Camera")
