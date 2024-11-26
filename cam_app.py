@@ -108,7 +108,8 @@ def main():
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
 
         if st.button("Save Predictions"):
-            try:
+            pass
+            # try:
                 # Save predictions to Firebase
                 # doc_ref = db.collection(db_schema_name_str).add(
                 #     {
@@ -123,8 +124,8 @@ def main():
 
                 # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
 
-            except Exception as e:
-                st.error(f"An error occurred while saving predictions: {e}")
+            # except Exception as e:
+            #     st.error(f"An error occurred while saving predictions: {e}")
 
 if __name__ == "__main__":
     main()
