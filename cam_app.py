@@ -95,15 +95,14 @@ def main():
         store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store")
         
         # Field of data predictions
-        # Create two columns for input fields
         col1, col2, col3 = st.columns([1, 1, 2])  # Adjust the column width ratio
-
+        
         # Input fields for postal code and store name in parallel
         with col1:
-            postal_code = st.text_input("Enter Postal Code:", placeholder="Example: 12345")
+            postal_code = st.text_input("Enter Postal Code:", placeholder="Example: 12345", key="postal_code_input")
         
         with col2:
-            store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store")
+            store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store", key="store_name_input")
         
         # Save button in the third column
         with col3:
