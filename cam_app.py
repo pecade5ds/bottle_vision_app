@@ -13,9 +13,6 @@ from roboflow import Roboflow
 # Firebase credentials
 cred = credentials.Certificate('./credentials/object-detection-credentials.json')
 
-# # Init credentials
-# initialize_app(cred)
-
 if not firebase_admin._apps:
     initialize_app(cred)
 
