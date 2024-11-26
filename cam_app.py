@@ -93,7 +93,7 @@ def main():
                 "predictions": robo_detected_label_counts_dict,
                 "post_code":11,
                 "store_name":1,
-                "coordinates:lat_long_vec,
+                "coordinates":lat_long_vec,
                 "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
             })
             st.success(f"Predictions saved to Firebase with ID: {doc_ref[1].id}")
