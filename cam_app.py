@@ -85,18 +85,33 @@ def main():
 
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
+        st.write("coord:", lat_long_vec)
         
-        # Button to save predictions to Firebase
-        if st.button("Save Predictions to Firebase"):
-            # Save predictions in Firestore
-            doc_ref = db.collection("predictions").add({
-                "predictions": robo_detected_label_counts_dict,
-                "post_code":11,
-                "store_name":1,
-                "coordinates":lat_long_vec,
-                "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
-            })
-            st.success(f"Predictions saved to Firebase with ID: {doc_ref[1].id}")
+        # Section to save predictions in Firebase
+        st.subheader("Save Predictions to Firebase")
+        
+        # Input fields for postal code and store name
+        postal_code = st.text_input("Enter Postal Code:", placeholder="Example: 12345")
+        store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store")
+        
+        # Button to save predictions
+        if st.button("Save Predictions"):
+            if not postal_code or not store_name:
+                st.warning("Please fill in all fields before saving the predictions.")
+            else:
+                try:
+                    # Save predictions to Firebase
+                    # doc_ref = db.collection("predictions").add({
+                    #     "predictions": robo_detected_label_counts_dict,
+                    #     "post_code": postal_code,
+                    #     "store_name": store_name,
+                    #     "coordinates": f"{lat}, {lon}" if lat and lon else "Location unavailable",
+                    #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
+                    # })
+                    doc_ref = [0,1]
+                    st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
+                except Exception as e:
+                    st.error(f"An error occurred while saving predictions: {e}")
 
 if __name__ == "__main__":
     main()
