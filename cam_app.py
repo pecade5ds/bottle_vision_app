@@ -81,10 +81,7 @@ def main():
     # Display the captured photo if available
     if picture:
         st.success("Photo captured successfully!")
-        
-        # get coordinates
-        lat_long_vec = get_lat_lon()
-        
+    
         # Load the picture into a PIL Image
         img = Image.open(BytesIO(picture.getvalue()))
         img_byte_arr = BytesIO()
@@ -99,6 +96,9 @@ def main():
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         st.markdown("---")
+
+        # get coordinates
+        lat_long_vec = get_lat_lon()
         
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
