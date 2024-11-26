@@ -13,7 +13,7 @@ from roboflow import Roboflow
 from utils import *
 
 # Firebase credentials
-cred = credentials.Certificate('./credentials/object-detection-credentials.json')
+cred = credentials.Certificate('./credentials/bottlevision-credentials.json')
 
 # if not firebase_admin._apps:
 #     initialize_app(cred)
