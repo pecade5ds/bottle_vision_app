@@ -120,8 +120,8 @@ def main():
                         #     "coordinates": lat_long_vec,
                         #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
                         # })
-                        doc_ref = [0,1]
-                        st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
+                        # doc_ref = [0,1]
+                        # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
                     except Exception as e:
                         st.error(f"An error occurred while saving predictions: {e}")
 
