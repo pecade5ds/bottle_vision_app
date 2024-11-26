@@ -95,7 +95,7 @@ def main():
         st.markdown("---")
 
         # get coordinates
-        lat_long_vec = get_lat_lon()
+        # lat_long_vec = get_lat_lon()
         
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
