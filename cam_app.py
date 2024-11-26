@@ -1,5 +1,6 @@
 import streamlit as st
 import geocoder
+import firebase_admin
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
 import base64
