@@ -39,18 +39,20 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
     return result
 
 def get_lat_lon():
-    # Execute geolocation from the browser
-    location = streamlit_js_eval(
-        js_expressions="await new Promise(resolve => navigator.geolocation.getCurrentPosition(pos => resolve(pos.coords)))",
-        key="geo_eval",
-    )
-    
-    if location:
-        lat = location.get("latitude", "Unavailable")
-        lon = location.get("longitude", "Unavailable")
+    try:
+        response = requests.get('http://ip-api.com/json')
+        data = response.json()
+
+        if data['status'] == 'fail':
+            st.error("Could not retrieve location from IP address.")
+            return None, None
+        
+        lat = data.get('lat', 'Unavailable')
+        lon = data.get('lon', 'Unavailable')
         return lat, lon
-    else:
-        st.error("Could not retrieve location. Make sure to allow location access in your browser.")
+    
+    except Exception as e:
+        st.error(f"Error occurred while fetching location: {str(e)}")
         return None, None
 
 # Main function for the application
