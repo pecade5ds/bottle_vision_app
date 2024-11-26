@@ -95,7 +95,7 @@ def main():
         store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store")
         
         # Field of data predictions
-        col1, col2, col3 = st.columns([1, 1, 2])  # Adjust the column width ratio
+        col1, col2 = st.columns([1, 1])  # Adjust the column width ratio
         
         # Input fields for postal code and store name in parallel
         with col1:
@@ -104,26 +104,25 @@ def main():
         with col2:
             store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store", key="store_name_input")
         
-        # Save button in the third column
-        with col3:
-            if st.button("Save Predictions"):
-                if not postal_code or not store_name:
-                    st.warning("Please fill in all fields before saving the predictions.")
-                else:
-                    try:
-                        # Save predictions to Firebase
-                        # doc_ref = db.collection("predictions").add({
-                        #     "predictions": robo_detected_label_counts_dict,
-                        #     "post_code": postal_code,
-                        #     "store_name": store_name,
-                        #     "coordinates": lat_long_vec,
-                        #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
-                        # })
-                        # doc_ref = [0,1]
-                        # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
-                        1+1
-                    except Exception as e:
-                        st.error(f"An error occurred while saving predictions: {e}")
+
+        if st.button("Save Predictions"):
+            if not postal_code or not store_name:
+                st.warning("Please fill in all fields before saving the predictions.")
+            else:
+                try:
+                    # Save predictions to Firebase
+                    # doc_ref = db.collection("predictions").add({
+                    #     "predictions": robo_detected_label_counts_dict,
+                    #     "post_code": postal_code,
+                    #     "store_name": store_name,
+                    #     "coordinates": lat_long_vec,
+                    #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
+                    # })
+                    # doc_ref = [0,1]
+                    # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
+                    1+1
+                except Exception as e:
+                    st.error(f"An error occurred while saving predictions: {e}")
 
 if __name__ == "__main__":
     main()
