@@ -1,4 +1,6 @@
 import streamlit as st
+import requests
+from typing import Optional, Tuple
 import firebase_admin
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
