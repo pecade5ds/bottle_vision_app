@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_js_eval import streamlit_js_eval
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
 import base64
@@ -37,6 +38,21 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
         result[class_name] = result.get(class_name, 0) + 1
     return result
 
+def get_lat_lon():
+    # Execute geolocation from the browser
+    location = streamlit_js_eval(
+        js_expressions="await new Promise(resolve => navigator.geolocation.getCurrentPosition(pos => resolve(pos.coords)))",
+        key="geo_eval",
+    )
+    
+    if location:
+        lat = location.get("latitude", "Unavailable")
+        lon = location.get("longitude", "Unavailable")
+        return lat, lon
+    else:
+        st.error("Could not retrieve location. Make sure to allow location access in your browser.")
+        return None, None
+
 # Main function for the application
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
@@ -50,6 +66,10 @@ def main():
     # Display the captured photo if available
     if picture:
         st.success("Photo captured successfully!")
+        
+        # get coordinates
+        lat_long_vec = get_lat_lon()
+        
         # Load the picture into a PIL Image
         img = Image.open(BytesIO(picture.getvalue()))
         img_byte_arr = BytesIO()
@@ -65,14 +85,17 @@ def main():
 
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
-
+        
         # Button to save predictions to Firebase
         if st.button("Save Predictions to Firebase"):
-            # # Save predictions in Firestore
-            # doc_ref = db.collection("predictions").add({
-            #     "predictions": robo_detected_label_counts_dict,
-            #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
-            # })
+            # Save predictions in Firestore
+            doc_ref = db.collection("predictions").add({
+                "predictions": robo_detected_label_counts_dict,
+                "post_code":11,
+                "store_name":1,
+                "coordinates:lat_long_vec,
+                "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
+            })
             st.success(f"Predictions saved to Firebase with ID: {doc_ref[1].id}")
 
 if __name__ == "__main__":
