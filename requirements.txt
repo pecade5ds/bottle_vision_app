@@ -1,5 +1,5 @@
-streamlit==1.40.1
-streamlit_js_eval==0.1.7
-firebase-admin==6.5.0
-ultralytics==8.3.37
-roboflow==1.1.49
+streamlit
+streamlit_js_eval
+firebase-admin
+ultralytics
+roboflow
