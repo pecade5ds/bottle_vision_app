@@ -18,12 +18,12 @@ firebase_admin.initialize_app(cred)
 # Connect to Firestore
 db = firestore.client()
 
-with open('./credentials/firebase_credentials.json', 'r') as json_file:
-    fb_cred = json.load(json_file)
-    db_schema_name_str = fb_cred["db_schema_name"]
-    project = fb_cred["project"]
-    fb_api_key = fb_cred["api_key"]
-    version_str = fb_cred["version"]
+with open('./credentials/robo_credentials.json', 'r') as json_file:
+    robo_cred = json.load(json_file)
+    db_schema_name_str = robo_cred["db_schema_name"]
+    project = robo_cred["project"]
+    fb_api_key = robo_cred["api_key"]
+    version_str = robo_cred["version"]
 
 # Roboflow Credentials
 rf = Roboflow(api_key=fb_api_key)
