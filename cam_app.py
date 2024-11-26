@@ -12,11 +12,15 @@ from roboflow import Roboflow
 # Firebase credentials
 cred = credentials.Certificate('./credentials/object-detection-credentials.json')
 
-# Init credentials
-initialize_app(cred)
+# # Init credentials
+# initialize_app(cred)
 
-# Connect to Firestore
-db = firestore.client()
+# if not firebase_admin._apps:
+#     initialize_app(cred)
+#     db = firestore.client()
+
+# # Connect to Firestore
+# db = firestore.client()
 
 with open('./credentials/robo_credentials.json', 'r') as json_file:
     robo_cred = json.load(json_file)
