@@ -1,4 +1,4 @@
-python3-opencv
+opencv-python
 streamlit
 geocoder
 firebase-admin
