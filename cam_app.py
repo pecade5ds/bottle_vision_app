@@ -12,6 +12,12 @@ from roboflow import Roboflow
 # Firebase credentials
 cred = credentials.Certificate('./credentials/object-detection-credentials.json')
 
+# Init credentials
+firebase_admin.initialize_app(cred)
+
+# Connect to Firestore
+db = firestore.client()
+
 with open('./credentials/firebase_credentials.json', 'r') as json_file:
     fb_cred = json.load(json_file)
     db_schema_name_str = fb_cred["db_schema_name"]
@@ -23,12 +29,6 @@ with open('./credentials/firebase_credentials.json', 'r') as json_file:
 rf = Roboflow(api_key=fb_api_key)
 project = rf.workspace().project(project)
 model_roboflow = project.version(version_str).model
-
-# Init credentials
-firebase_admin.initialize_app(cred)
-
-# Connect to Firestore
-db = firestore.client()
 
 # Models Initialization
 yolo_models_dict = {
