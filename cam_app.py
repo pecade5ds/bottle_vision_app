@@ -10,6 +10,7 @@ import geocoder
 import numpy as np
 from PIL import Image
 from roboflow import Roboflow
+from utils import *
 
 # Firebase credentials
 cred = credentials.Certificate('./credentials/object-detection-credentials.json')
@@ -37,14 +38,6 @@ yolo_models_dict = {
     # "custom_model": YOLO("/content/drive/MyDrive/Colab Notebooks/Data/best.pt"),
     "roboflow_model": project.version("2").model,
 }
-
-def filter_and_count(data, threshold=0.5, class_var="class"):
-    filtered_data = [item for item in data if item["confidence"] >= threshold]
-    result = {}
-    for item in filtered_data:
-        class_name = item[class_var]
-        result[class_name] = result.get(class_name, 0) + 1
-    return result
 
 def get_location_geocoder() -> Tuple[Optional[float], Optional[float]]:
     """
