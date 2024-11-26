@@ -98,6 +98,22 @@ def main():
         roboflow_result = yolo_models_dict["roboflow_model"].predict(image_np, confidence=50, overlap=30)
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
+        # Custom horizontal divider
+        st.markdown(
+            """
+            <style>
+            hr {
+                border: 2px solid #000000;  /* Black color */
+                border-radius: 5px;  /* Optional: Rounded edges */
+            }
+            </style>
+            """, 
+            unsafe_allow_html=True
+        )
+        
+        # Example of using a custom black divider
+        st.markdown("---")
+        
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
         st.write("coord:", lat_long_vec)
