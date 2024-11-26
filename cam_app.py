@@ -122,7 +122,7 @@ def main():
         st.success("Photo captured successfully!")
 
         # Predict using YOLO model
-        st.write(type(picture)))
+        st.write(type(picture))
         # roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(picture.convert('RGB')), confidence=50, overlap=30)
         # robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
