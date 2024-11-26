@@ -5,7 +5,6 @@ from io import BytesIO
 import base64
 import json
 import geocoder
-import cv2
 import numpy as np
 from PIL import Image
 from roboflow import Roboflow
@@ -119,18 +118,9 @@ def main():
     # Display the captured photo if available
     if picture:
         st.success("Photo captured successfully!")
-    
-        # Load the picture into a PIL Image
-        img = Image.open(BytesIO(picture.getvalue()))
-        img_byte_arr = BytesIO()
-        img.save(img_byte_arr, format='PNG')
-        img_bytes = img_byte_arr.getvalue()
-
-        # Convert image to numpy array
-        image_np = cv2.imdecode(np.frombuffer(img_bytes, np.uint8), cv2.IMREAD_COLOR)
 
         # Predict using YOLO model
-        roboflow_result = yolo_models_dict["roboflow_model"].predict(image_np, confidence=50, overlap=30)
+        roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(picture.convert('RGB')), confidence=50, overlap=30)
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         with st.spinner("Retrieving your location..."):
@@ -170,7 +160,7 @@ def main():
                 #     "shelf id": shelf_id,
                 #     "store_name": store_name,
                 #     # "coordinates": (lat, lon),
-                #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
+                #     "photo_base64": base64.b64encode(picture).decode("utf-8"),
                 # }
                 # )
 
