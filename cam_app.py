@@ -160,8 +160,8 @@ def main():
                     "post_code": postal_code,
                     "shelf id": shelf_id,
                     "store_name": store_name,
-                    # "coordinates": (lat, lon),
-                    "photo_base64": base64.b64encode(picture).decode("utf-8"),
+                    "coordinates": (lat, lon),
+                    # "photo_base64": base64.b64encode(picture).decode("utf-8"),
                 }
                 )
 
