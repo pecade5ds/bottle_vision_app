@@ -116,7 +116,7 @@ def main():
 
         # Predict using YOLO model
         roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(BytesIO(picture.getvalue()))) , confidence=50, overlap=30)
-        # robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
+        robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         with st.spinner("Retrieving your location..."):
             lat, lon = get_location()
@@ -125,8 +125,12 @@ def main():
         st.markdown("---")
         
         # Show detected labels and counts
-        # st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
-        
+        if robo_detected_label_counts_dict:
+            st.write("Predicted labels and counts:")
+            st.table(pd.DataFrame(list(robo_detected_label_counts_dict.items()), columns=["Label", "Count"])) 
+        else:
+            st.write("No predicted labels to display.")
+            
         # Section to save predictions in Firebase
         st.subheader("Save Predictions to Firebase")
         
