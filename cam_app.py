@@ -4,6 +4,7 @@ from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
 import base64
 import json
+import geocoder
 import cv2
 import numpy as np
 from PIL import Image
@@ -43,6 +44,53 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
         class_name = item[class_var]
         result[class_name] = result.get(class_name, 0) + 1
     return result
+
+def get_location_geocoder() -> Tuple[Optional[float], Optional[float]]:
+    """
+    Get location using geocoder library
+    """
+    g = geocoder.ip('me')
+    if g.ok:
+        return g.latlng[0], g.latlng[1]
+    return None, None
+
+def get_location_ipapi() -> Tuple[Optional[float], Optional[float]]:
+    """
+    Fallback method using ipapi.co service
+    """
+    try:
+        response = requests.get('https://ipapi.co/json/')
+        if response.status_code == 200:
+            data = response.json()
+            lat = data.get('latitude')
+            lon = data.get('longitude')
+            
+            if lat is not None and lon is not None:
+                # Store additional location data in session state
+                st.session_state.location_data = {
+                    'city': data.get('city'),
+                    'region': data.get('region'),
+                    'country': data.get('country_name'),
+                    'ip': data.get('ip')
+                }
+                return lat, lon
+    except requests.RequestException as e:
+        st.error(f"Error retrieving location from ipapi.co: {str(e)}")
+    return None, None
+
+def get_location() -> Tuple[Optional[float], Optional[float]]:
+    """
+    Tries to get location first using geocoder, then falls back to ipapi.co
+    """
+    # Try geocoder first
+    lat, lon = get_location_geocoder()
+    
+    # If geocoder fails, try ipapi
+    if lat is None:
+        st.info("Primary geolocation method unsuccessful, trying alternative...")
+        lat, lon = get_location_ipapi()
+    
+    return lat, lon
     
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
@@ -85,6 +133,9 @@ def main():
         roboflow_result = yolo_models_dict["roboflow_model"].predict(image_np, confidence=50, overlap=30)
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
+        with st.spinner("Retrieving your location..."):
+            lat, lon = get_location()
+
         st.markdown("---")
         
         # Show detected labels and counts
@@ -107,6 +158,7 @@ def main():
         with col3:
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
 
+        st.write(f"{(lat, lon)}")
         if st.button("Save Predictions"):
             pass
             # try:
@@ -117,7 +169,7 @@ def main():
                 #     "post_code": postal_code,
                 #     "shelf id": shelf_id,
                 #     "store_name": store_name,
-                #     # "coordinates": lat_long_vec,
+                #     # "coordinates": (lat, lon),
                 #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
                 # }
                 # )
