@@ -150,7 +150,7 @@ def main():
         if st.button("Save Predictions"):
 
             try:
-                Save predictions to Firebase
+                # Save predictions to Firebase
                 doc_ref = db.collection(db_schema_name_str).add(
                     {
                     "predictions": robo_detected_label_counts_dict,
