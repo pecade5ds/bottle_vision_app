@@ -13,16 +13,7 @@ from roboflow import Roboflow
 from utils import *
 
 # Firebase credentials
-
 db = firestore.Client.from_service_account_json('./credentials/bottlevision-credentials.json')
-
-# cred = credentials.Certificate('./credentials/bottlevision-credentials.json')
-
-# if not firebase_admin._apps:
-#     initialize_app(cred)
-
-# # # Connect to Firestore
-# db = firestore.client()
 
 with open('./credentials/robo_credentials.json', 'r') as json_file:
     robo_cred = json.load(json_file)
@@ -151,24 +142,24 @@ def main():
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
 
         if st.button("Save Predictions"):
+            pass
+            # try:
+            #     # Save predictions to Firebase
+            #     doc_ref = db.collection(db_schema_name_str).add(
+            #         {
+            #         "predictions": robo_detected_label_counts_dict,
+            #         "post_code": postal_code,
+            #         "shelf id": shelf_id,
+            #         "store_name": store_name,
+            #         "coordinates": (lat, lon),
+            #         # "photo_base64": base64.b64encode(picture).decode("utf-8"),
+            #     }
+            #     )
 
-            try:
-                # Save predictions to Firebase
-                doc_ref = db.collection(db_schema_name_str).add(
-                    {
-                    "predictions": robo_detected_label_counts_dict,
-                    "post_code": postal_code,
-                    "shelf id": shelf_id,
-                    "store_name": store_name,
-                    "coordinates": (lat, lon),
-                    # "photo_base64": base64.b64encode(picture).decode("utf-8"),
-                }
-                )
+            #     st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
 
-                st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
-
-            except Exception as e:
-                st.error(f"An error occurred while saving predictions: {e}")
+            # except Exception as e:
+            #     st.error(f"An error occurred while saving predictions: {e}")
 
 if __name__ == "__main__":
     main()
