@@ -1,4 +1,6 @@
 opencv-python-headless
+opencv-python
+python3-opencv
 streamlit
 geocoder
 firebase-admin
