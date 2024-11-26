@@ -38,53 +38,6 @@ yolo_models_dict = {
     # "custom_model": YOLO("/content/drive/MyDrive/Colab Notebooks/Data/best.pt"),
     "roboflow_model": project.version("2").model,
 }
-
-def get_location_geocoder() -> Tuple[Optional[float], Optional[float]]:
-    """
-    Get location using geocoder library
-    """
-    g = geocoder.ip('me')
-    if g.ok:
-        return g.latlng[0], g.latlng[1]
-    return None, None
-
-def get_location_ipapi() -> Tuple[Optional[float], Optional[float]]:
-    """
-    Fallback method using ipapi.co service
-    """
-    try:
-        response = requests.get('https://ipapi.co/json/')
-        if response.status_code == 200:
-            data = response.json()
-            lat = data.get('latitude')
-            lon = data.get('longitude')
-            
-            if lat is not None and lon is not None:
-                # Store additional location data in session state
-                st.session_state.location_data = {
-                    'city': data.get('city'),
-                    'region': data.get('region'),
-                    'country': data.get('country_name'),
-                    'ip': data.get('ip')
-                }
-                return lat, lon
-    except requests.RequestException as e:
-        st.error(f"Error retrieving location from ipapi.co: {str(e)}")
-    return None, None
-
-def get_location() -> Tuple[Optional[float], Optional[float]]:
-    """
-    Tries to get location first using geocoder, then falls back to ipapi.co
-    """
-    # Try geocoder first
-    lat, lon = get_location_geocoder()
-    
-    # If geocoder fails, try ipapi
-    if lat is None:
-        st.info("Primary geolocation method unsuccessful, trying alternative...")
-        lat, lon = get_location_ipapi()
-    
-    return lat, lon
     
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
@@ -115,8 +68,7 @@ def main():
         st.success("Photo captured successfully!")
 
         # Predict using YOLO model
-        st.write(type(picture))
-        # roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(picture.convert('RGB')), confidence=50, overlap=30)
+        roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(BytesIO(picture.getvalue()))) , confidence=50, overlap=30)
         # robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         with st.spinner("Retrieving your location..."):
