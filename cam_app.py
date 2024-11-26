@@ -13,7 +13,7 @@ from roboflow import Roboflow
 cred = credentials.Certificate('./credentials/object-detection-credentials.json')
 
 # Init credentials
-firebase_admin.initialize_app(cred)
+initialize_app(cred)
 
 # Connect to Firestore
 db = firestore.client()
