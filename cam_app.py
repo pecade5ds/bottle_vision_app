@@ -120,12 +120,12 @@ def main():
 
         with st.spinner("Retrieving your location..."):
             lat, lon = get_location()
-
+        
+        st.write(f"{(lat, lon)}")
         st.markdown("---")
         
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
-        # st.write("coord:", lat_long_vec)
         
         # Section to save predictions in Firebase
         st.subheader("Save Predictions to Firebase")
@@ -143,7 +143,6 @@ def main():
         with col3:
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
 
-        st.write(f"{(lat, lon)}")
         if st.button("Save Predictions"):
             pass
             # try:
