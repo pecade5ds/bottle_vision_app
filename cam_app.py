@@ -122,6 +122,7 @@ def main():
                         # })
                         # doc_ref = [0,1]
                         # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
+                        1+1
                     except Exception as e:
                         st.error(f"An error occurred while saving predictions: {e}")
 
