@@ -38,17 +38,17 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
         result[class_name] = result.get(class_name, 0) + 1
     return result
 
-def get_lat_lon():
-    # Use geocoder to get the location based on IP
-    g = geocoder.ip('me')
+# def get_lat_lon():
+#     # Use geocoder to get the location based on IP
+#     g = geocoder.ip('me')
     
-    if g.ok:
-        lat = g.latlng[0]  # Latitude
-        lon = g.latlng[1]  # Longitude
-        return lat, lon
-    else:
-        st.error("Could not retrieve location from IP address.")
-        return None, None
+#     if g.ok:
+#         lat = g.latlng[0]  # Latitude
+#         lon = g.latlng[1]  # Longitude
+#         return lat, lon
+#     else:
+#         st.error("Could not retrieve location from IP address.")
+#         return None, None
 
 # Main function for the application
 def main():
@@ -99,13 +99,13 @@ def main():
         
         # Show detected labels and counts
         st.write("Predicted labels and counts:", robo_detected_label_counts_dict)
-        st.write("coord:", lat_long_vec)
+        # st.write("coord:", lat_long_vec)
         
         # Section to save predictions in Firebase
         st.subheader("Save Predictions to Firebase")
         
         # Input fields for postal code and store name
-        col1, col2 = st.columns([1, 1])  # Adjust the column width ratio
+        col1, col2, col3 = st.columns([1, 1, 1])  # Adjust the column width ratio
         
         # Input fields for postal code and store name in parallel
         with col1:
@@ -113,6 +113,9 @@ def main():
         
         with col2:
             store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store", key="store_name_input")
+
+        with col3:
+            shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
         
 
         if st.button("Save Predictions"):
@@ -121,16 +124,17 @@ def main():
             else:
                 try:
                     # Save predictions to Firebase
-                    # doc_ref = db.collection("predictions").add({
-                    #     "predictions": robo_detected_label_counts_dict,
-                    #     "post_code": postal_code,
-                    #     "store_name": store_name,
-                    #     "coordinates": lat_long_vec,
-                    #     "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
-                    # })
-                    # doc_ref = [0,1]
-                    # st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
-                    1+1
+                    doc_ref = db.collection("predictions").add({
+                        "predictions": robo_detected_label_counts_dict,
+                        "post_code": postal_code,
+                        "shelf id": shelf_id,
+                        "store_name": store_name,
+                        # "coordinates": lat_long_vec,
+                        "photo_base64": base64.b64encode(img_bytes).decode("utf-8"),
+                    })
+
+                    st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
+
                 except Exception as e:
                     st.error(f"An error occurred while saving predictions: {e}")
 
