@@ -13,7 +13,8 @@ from roboflow import Roboflow
 from utils import *
 
 # Firebase credentials
-cred = credentials.Certificate('./credentials/bottlevision-credentials.json')
+# cred = credentials.Certificate('./credentials/bottlevision-credentials.json')
+db = firestore.Client.from_service_account_json('./credentials/bottlevision-credentials.json')
 
 # if not firebase_admin._apps:
 #     initialize_app(cred)
