@@ -91,10 +91,6 @@ def main():
         st.subheader("Save Predictions to Firebase")
         
         # Input fields for postal code and store name
-        postal_code = st.text_input("Enter Postal Code:", placeholder="Example: 12345")
-        store_name = st.text_input("Enter Store Name:", placeholder="Example: XYZ Store")
-        
-        # Field of data predictions
         col1, col2 = st.columns([1, 1])  # Adjust the column width ratio
         
         # Input fields for postal code and store name in parallel
