@@ -16,13 +16,11 @@ cred = credentials.Certificate('./credentials/object-detection-credentials.json'
 # # Init credentials
 # initialize_app(cred)
 
-try:
+if not firebase_admin._apps:
     initialize_app(cred)
-except:
-    pass
 
 # # Connect to Firestore
-# db = firestore.client()
+db = firestore.client()
 
 with open('./credentials/robo_credentials.json', 'r') as json_file:
     robo_cred = json.load(json_file)
@@ -80,9 +78,6 @@ def main():
     
     # Example of using a custom divider
     st.markdown("---")
-
-    # Cliente fire store
-    db = firestore.client()
 
     # Option to enable or disable the camera
     enable_camera = st.checkbox("Enable Camera")
