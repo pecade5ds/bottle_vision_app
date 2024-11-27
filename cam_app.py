@@ -118,7 +118,15 @@ def main():
         roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(BytesIO(picture.getvalue()))) , confidence=50, overlap=30)
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
-        # TODO: Load a general YOLO model "COCO" that recognizes just bottles (filter al clases)
+        # Base model for Bottle detection (denominator for ocmputing "Water store share")
+        model = YOLO('yolov8n.pt')  
+        
+        # Predict just on bottles
+        bottles_pred = model.predict(photo,
+                                classes=[39],  # ID "bottle" class
+                                conf=0.5)
+        
+        denominator_results = filter_and_count(bottles_pred[0].summary(), threshold=0.5, class_var="name")["bottle"]
 
         with st.spinner("Retrieving your location..."):
             lat, lon = get_location()
@@ -162,6 +170,7 @@ def main():
                     {
                         "photo_type": photo_type,
                         "predictions": robo_detected_label_counts_dict,
+                        "Num_bottles":denominator_results,
                         "post_code": postal_code,
                         "shelf id": shelf_id,
                         "store_type": store_type,
