@@ -37,16 +37,9 @@ To run this project, follow these steps:
    git clone https://github.com/your-username/danone-bottle-vision.git
    cd danone-bottle-vision
 
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/danone-bottle-vision.git
-   cd danone-bottle-vision
-
 2. Set up a virtual environment (optional but recommended):
 
-  ```bash
+   ```bash
   python3 -m venv venv
   source venv/bin/activate  # On Windows, use `venv\Scripts\activate
 
