@@ -24,9 +24,9 @@ with open('./config/query_config.json', 'r') as json_file:
     db_schema_name_str = json.load(json_file)["db_schema_name"]
 
 # Roboflow Credentials
-rf = Roboflow(api_key=st.secrets["firebase"]["api_key"])
-project = rf.workspace().project(st.secrets["firebase"]["project"])
-model_roboflow = project.version(st.secrets["firebase"]["version"]).model
+rf = Roboflow(api_key=st.secrets["roboflow"]["api_key"])
+project = rf.workspace().project(st.secrets["roboflow"]["project"])
+model_roboflow = project.version(st.secrets["roboflow"]["version"]).model
 
 # Models Initialization
 yolo_models_dict = {
