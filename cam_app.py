@@ -1,7 +1,3 @@
-## Secrets Managements
-# https://discuss.streamlit.io/t/how-to-use-an-entire-json-file-in-the-secrets-app-settings-when-deploying-on-the-community-cloud/49375
-# https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management
-
 import streamlit as st
 import requests
 from typing import Optional, Tuple
