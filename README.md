@@ -38,6 +38,12 @@ To run this project, follow these steps:
    cd danone-bottle-vision
 
 
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/danone-bottle-vision.git
+   cd danone-bottle-vision
+
 2. Set up a virtual environment (optional but recommended):
 
   ```bash
