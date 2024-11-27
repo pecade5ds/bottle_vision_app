@@ -176,4 +176,4 @@ import json
 firebase_credentials = st.secrets
 
 # Usar el cliente de Firestore
-st.write(f"Conexión a Firestore exitosa!{type(firebase_credentials)}")
+st.write(f"Conexión a Firestore exitosa!{firebase_credentials}")
