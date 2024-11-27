@@ -93,13 +93,17 @@ The app tries to determine the user's geographical location using two methods:
 * YOLO-based predictions are run on the captured image to detect the bottles and categorize them.
 * The results are displayed along with metadata in the app interface.
 
-4. Example Output
+Example Output:
 Once an image is captured, the app will display the detected labels and their respective counts in a table. For example:
+
+<div align="center">
 
 | Label  | Count |
 |--------|-------|
 | Water  | 3     |
 | Bottle | 2     |
+
+</div>
 
 It will also display the user's geographical location and provide input fields for metadata like store name, postal code, and shelf ID. The predictions can be saved to Firestore.
 ---
