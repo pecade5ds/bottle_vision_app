@@ -135,7 +135,7 @@ def main():
         st.subheader("Save Predictions to Firebase")
         
         # Input fields for postal code and store name
-        col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Adjust the column width ratio
+        col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])  # Adjust the column width ratio
         
         # Input fields for postal code and store name in parallel
         with col1:
@@ -150,18 +150,22 @@ def main():
         with col4:
             store_type = st.selectbox("Select Store Type", ["TT", "OT"], key="store_type")
 
+        with col5:
+            foto_type = st.selectbox("Select Store Type", ["Test", "Prod"], key="foto_type") # This is when testing the app to filter garbage
+
         if st.button("Save Predictions"):
             try:
                 # Save predictions to Firebase
                 doc_ref = db.collection(db_schema_name_str).add(
                     {
-                    "predictions": robo_detected_label_counts_dict,
-                    "post_code": postal_code,
-                    "shelf id": shelf_id,
-                    "store_type": store_type,
-                    "store_name": store_name,
-                    "coordinates": (lat, lon),
-                    "photo": convert_image_to_base64(picture),
+                        "photo_type": photo_type,
+                        "predictions": robo_detected_label_counts_dict,
+                        "post_code": postal_code,
+                        "shelf id": shelf_id,
+                        "store_type": store_type,
+                        "store_name": store_name,
+                        "coordinates": (lat, lon),
+                        "photo": convert_image_to_base64(picture),
                 }
                 )
 
