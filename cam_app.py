@@ -169,28 +169,11 @@ import streamlit as st
 from google.cloud import firestore
 import json
 
-# Accede a los secretos de Firebase
-firebase_creds = st.secrets["firebase_credentials"]
+# Acceder a las credenciales desde los secretos
+firebase_credentials = st.secrets["firebase_credentials"]
 
-# Convertir las credenciales a formato JSON
-credentials_dict = {
-    "type": firebase_creds["type"],
-    "project_id": firebase_creds["project_id"],
-    "private_key_id": firebase_creds["private_key_id"],
-    "private_key": firebase_creds["private_key"],
-    "client_email": firebase_creds["client_email"],
-    "client_id": firebase_creds["client_id"],
-    "auth_uri": firebase_creds["auth_uri"],
-    "token_uri": firebase_creds["token_uri"],
-    "auth_provider_x509_cert_url": firebase_creds["auth_provider_x509_cert_url"],
-    "client_x509_cert_url": firebase_creds["client_x509_cert_url"]
-}
-
-# Convertir el diccionario a un string JSON
-credentials_json = json.dumps(credentials_dict)
-
-# Crear el cliente de Firestore a partir del JSON de credenciales
-db = firestore.Client.from_service_account_info(json.loads(credentials_json))
+# Usar las credenciales para conectar a Firestore
+db = firestore.Client.from_service_account_info(firebase_credentials)
 
 # Usar el cliente de Firestore
 st.write("Conexión a Firestore exitosa!")
