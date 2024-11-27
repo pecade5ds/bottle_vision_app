@@ -42,13 +42,12 @@ To run this project, follow these steps:
 
   ```bash
   python3 -m venv venv
-  source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+  source venv/bin/activate  # On Windows, use `venv\Scripts\activate
 
 3. Install the required dependencies:
 
   ```bash
   pip install -r requirements.txt
-
 
 4. Configure Firebase:
 
