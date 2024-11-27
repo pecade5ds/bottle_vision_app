@@ -20,8 +20,8 @@ from utils import *
 # Firebase credentials
 db = firestore.Client.from_service_account_info(st.secrets["firebase"])
 
-with open('./credentials/query_config.json', 'r') as json_file:
-    db_schema_name_str = json_file["db_schema_name"]
+with open('./config/query_config.json', 'r') as json_file:
+    db_schema_name_str = json.load(json_file)["db_schema_name"]
 
 # Roboflow Credentials
 rf = Roboflow(api_key=st.secrets["firebase"]["api_key"])
