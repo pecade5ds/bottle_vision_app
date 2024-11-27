@@ -31,7 +31,7 @@ yolo_models_dict = {
 }
 
 def convert_image_to_base64(photo: Image.Image) -> str:
-    buffer = io.BytesIO()
+    buffer = BytesIO()
     photo.save(buffer, format="PNG")  
     photo_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
     return photo_base64
