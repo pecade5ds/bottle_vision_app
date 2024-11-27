@@ -47,7 +47,8 @@ To run this project, follow these steps:
 3. Install the required dependencies:
 
   ```bash
-  pip install -r requirements.txt´´´
+  pip install -r requirements.txt
+´´´
 
 4. Configure Firebase:
 
@@ -62,7 +63,7 @@ Store the API key and project details in the st.secrets["firebase"] configuratio
 
 ---
 
-Usage
+## Usage
 Start the Streamlit application:
 
 ```bash
