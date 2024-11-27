@@ -31,7 +31,7 @@ model_roboflow = project.version(st.secrets["roboflow"]["version"]).model
 # Models Initialization
 yolo_models_dict = {
     # "custom_model": YOLO("/content/drive/MyDrive/Colab Notebooks/Data/best.pt"),
-    "roboflow_model": project.version(st.secrets["firebase"]["version"]).model,
+    "roboflow_model": project.version(st.secrets["roboflow"]["version"]).model,
 }
 
 def get_location_geocoder() -> Tuple[Optional[float], Optional[float]]:
