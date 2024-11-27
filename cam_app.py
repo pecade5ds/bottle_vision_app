@@ -148,10 +148,10 @@ def main():
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
         
         with col4:
-            store_type = st.selectbox("Select Store Type", ["TT", "OT"], key="store_type")
+            store_type = st.selectbox("Select Store Type", ["TT", "OT"], key="store_type", index=1)
 
         with col5:
-            foto_type = st.selectbox("Select Store Type", ["Test", "Prod"], key="foto_type") # This is when testing the app to filter garbage
+            foto_type = st.selectbox("Select Store Type", ["Test", "Prod"], key="foto_type", index=1) # This is when testing the app to filter garbage
 
         if st.button("Save Predictions"):
             try:
