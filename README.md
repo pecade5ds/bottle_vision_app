@@ -46,8 +46,8 @@ To run this project, follow these steps:
 
 3. Install the required dependencies:
 
-  ```bash
-  pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 
 4. Configure Firebase:
 
