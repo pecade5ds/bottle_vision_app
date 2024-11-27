@@ -30,9 +30,12 @@ yolo_models_dict = {
     "roboflow_model": project.version(st.secrets["roboflow"]["version"]).model,
 }
 
-def convert_image_to_base64(photo: Image.Image) -> str:
+def convert_image_to_base64(photo) -> str:
+    image = Image.open(BytesIO(photo.getvalue()))  # Convertir UploadedFile a PIL.Image
+    
+
     buffer = BytesIO()
-    photo.save(buffer, format="PNG")  
+    image.save(buffer, format="PNG")  
     photo_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
     return photo_base64
     
