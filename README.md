@@ -37,6 +37,13 @@ To run this project, follow these steps:
 - config json for right query location.
 
 ---
+
+## Secrets Management
+
+- [How to use an entire JSON file in the secrets app settings when deploying on the community cloud](https://discuss.streamlit.io/t/how-to-use-an-entire-json-file-in-the-secrets-app-settings-when-deploying-on-the-community-cloud/49375)
+- [Streamlit Docs: Secrets Management](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management)
+
+---
 ### Steps
 
 1. Clone the repository:
