@@ -1,4 +1,4 @@
-# Danone Waters Bottle Vision <img src="https://www.danoneespana.es/content/dam/corp/local/esp/5_noticias/recursos/logotipos/00_danone0.jpg" alt="Danone" width="150">
+# Waters Bottle Vision
 
 <div align="center">
     <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
