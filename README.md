@@ -106,12 +106,15 @@ Once an image is captured, the app will display the detected labels and their re
 </div>
 
 It will also display the user's geographical location and provide input fields for metadata like store name, postal code, and shelf ID. The predictions can be saved to Firestore.
+
 ---
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
+
 ---
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+
 ---
 ## Acknowledgments
 Roboflow for providing the pre-trained YOLO model.
