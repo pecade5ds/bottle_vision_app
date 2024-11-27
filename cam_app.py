@@ -18,24 +18,20 @@ from google.cloud import firestore
 from utils import *
 
 # Firebase credentials
-db = firestore.Client.from_service_account_info(st.secrets)
+db = firestore.Client.from_service_account_info(st.secrets["firebase"])
 
-with open('./credentials/robo_credentials.json', 'r') as json_file:
-    robo_cred = json.load(json_file)
-    db_schema_name_str = robo_cred["db_schema_name"]
-    project = robo_cred["project"]
-    fb_api_key = robo_cred["api_key"]
-    version_str = robo_cred["version"]
+with open('./credentials/query_config.json', 'r') as json_file:
+    db_schema_name_str = json_file["db_schema_name"]
 
 # Roboflow Credentials
-rf = Roboflow(api_key=fb_api_key)
-project = rf.workspace().project(project)
-model_roboflow = project.version(version_str).model
+rf = Roboflow(api_key=st.secrets["firebase"]["api_key"])
+project = rf.workspace().project(st.secrets["firebase"]["project"])
+model_roboflow = project.version(st.secrets["firebase"]["version"]).model
 
 # Models Initialization
 yolo_models_dict = {
     # "custom_model": YOLO("/content/drive/MyDrive/Colab Notebooks/Data/best.pt"),
-    "roboflow_model": project.version("2").model,
+    "roboflow_model": project.version(st.secrets["firebase"]["version"]).model,
 }
 
 def get_location_geocoder() -> Tuple[Optional[float], Optional[float]]:
