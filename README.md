@@ -64,9 +64,8 @@ Store the API key and project details in the st.secrets["firebase"] configuratio
 ## Usage
 Start the Streamlit application:
 
-```bash
-streamlit run app.py
-´´´
+   ```bash
+   streamlit run app.py
 
 The web app will open, allowing users to:
 
