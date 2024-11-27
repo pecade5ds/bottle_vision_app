@@ -172,8 +172,8 @@ import streamlit as st
 from google.cloud import firestore
 import json
 
-# Acceder a las credenciales desde los secretos
-firebase_credentials = st.secrets
+
+db = firestore.Client.from_service_account_info(st.secrets)
 
 # Usar el cliente de Firestore
-st.write(f"Conexión a Firestore exitosa!{firebase_credentials}")
+st.write(f"Conexión a Firestore exitosa!")
