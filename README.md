@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/Beta-000000?style=flat&logo=beta&logoColor=white" alt="Beta">
     <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" alt="Streamlit">
     <img src="https://img.shields.io/badge/Roboflow-FFD700?style=flat&logo=roboflow&logoColor=black" alt="Roboflow">
-    <img src="https://example.com/path_to_danone_logo.png" alt="Danone" width="150">
+    <img src="https://www.danoneespana.es/content/dam/corp/local/esp/5_noticias/recursos/logotipos/00_danone0.jpg" alt="Danone" width="150">
 </div>
 
 
