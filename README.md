@@ -1,5 +1,11 @@
 # Danone Waters Bottle Vision
 
+<div align="center">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/Beta-000000?style=flat&logo=beta&logoColor=white" alt="Beta">
+    <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" alt="Streamlit">
+</div>
+
 ## Overview
 
 This project leverages **Computer Vision** to detect and categorize water bottles using images captured via a webcam. The application utilizes a **YOLO** model, integrated with **Roboflow** for pre-trained object detection, to classify different types of water bottles. The predictions are then stored in **Firebase Firestore** along with metadata such as store information and geographic location.
