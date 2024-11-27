@@ -145,7 +145,7 @@ def main():
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
         
         with col4:
-            store_type = st.selectbox("Select Store Type", ["TT", "OT"], key="store_type", index=1)
+            store_type = st.selectbox("Select Store Type", ["TT", "OT"], key="store_type")
 
         if st.button("Save Predictions"):
             try:
