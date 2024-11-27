@@ -63,20 +63,15 @@ Store the API key and project details in the st.secrets["firebase"] configuratio
 ---
 
 ## Usage
-Start the Streamlit application:
-
-
-   ```bash
-   streamlit run app.py
-
+Start the Streamlit application with streamlit run app.py.
 
 The web app will open, allowing users to:
 
-Enable the camera to take a photo of a bottle.
-Automatically predict the category of the bottle using the YOLO model.
-Display the detected labels and their counts.
-Input metadata such as postal code, store name, and shelf ID.
-Save the predictions to Firebase for further analysis.
+- Enable the camera to take a photo of a bottle.
+- Automatically predict the category of the bottle using the YOLO model.
+- Display the detected labels and their counts.
+- Input metadata such as postal code, store name, and shelf ID.
+- Save the predictions to Firebase for further analysis.
 ---
 ## Code Overview
 
