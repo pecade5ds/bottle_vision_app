@@ -30,6 +30,12 @@ yolo_models_dict = {
     "roboflow_model": project.version(st.secrets["roboflow"]["version"]).model,
 }
 
+def convert_image_to_base64(photo: Image.Image) -> str:
+    buffer = io.BytesIO()
+    photo.save(buffer, format="PNG")  
+    photo_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+    return photo_base64
+    
 def get_location_geocoder() -> Tuple[Optional[float], Optional[float]]:
     """
     Get location using geocoder library
@@ -126,7 +132,7 @@ def main():
         st.subheader("Save Predictions to Firebase")
         
         # Input fields for postal code and store name
-        col1, col2, col3 = st.columns([1, 1, 1])  # Adjust the column width ratio
+        col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Adjust the column width ratio
         
         # Input fields for postal code and store name in parallel
         with col1:
@@ -137,26 +143,29 @@ def main():
 
         with col3:
             shelf_id = st.text_input("Enter Shelf id:", placeholder="Example: 1", key="shelf_id_input")
+        
+        with col4:
+            store_type = st.selectbox("Select Store Type", ["TT", "OT"], key="store_type", index=1)
 
         if st.button("Save Predictions"):
-            pass
-            # try:
-            #     # Save predictions to Firebase
-            #     doc_ref = db.collection(db_schema_name_str).add(
-            #         {
-            #         "predictions": robo_detected_label_counts_dict,
-            #         "post_code": postal_code,
-            #         "shelf id": shelf_id,
-            #         "store_name": store_name,
-            #         "coordinates": (lat, lon),
-            #         # "photo_base64": base64.b64encode(picture).decode("utf-8"),
-            #     }
-            #     )
+            try:
+                # Save predictions to Firebase
+                doc_ref = db.collection(db_schema_name_str).add(
+                    {
+                    "predictions": robo_detected_label_counts_dict,
+                    "post_code": postal_code,
+                    "shelf id": shelf_id,
+                    "store_type": store_type,
+                    "store_name": store_name,
+                    "coordinates": (lat, lon),
+                    "photo": convert_image_to_base64(photo: Image.Image),
+                }
+                )
 
-            #     st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
+                st.success(f"Predictions successfully saved with ID: {doc_ref[1].id}!")
 
-            # except Exception as e:
-            #     st.error(f"An error occurred while saving predictions: {e}")
+            except Exception as e:
+                st.error(f"An error occurred while saving predictions: {e}")
 
 if __name__ == "__main__":
     main()
