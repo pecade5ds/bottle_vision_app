@@ -158,7 +158,7 @@ def main():
                     "store_type": store_type,
                     "store_name": store_name,
                     "coordinates": (lat, lon),
-                    "photo": convert_image_to_base64(photo: Image.Image),
+                    "photo": convert_image_to_base64(picture),
                 }
                 )
 
