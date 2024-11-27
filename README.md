@@ -26,6 +26,7 @@ To run this project, follow these steps:
 - Python 3.8 or higher
 - Firebase account and Firestore setup
 - Roboflow account for the model API key
+- config json for right query location.
 
 ---
 ### Steps
@@ -87,9 +88,11 @@ The project uses a pre-trained YOLO model available via Roboflow. It performs re
 3. Geolocation
 The app tries to determine the user's geographical location using two methods:
 
-* Geocoder: Fetches location data using IP.
-* ipapi.co: A fallback method in case Geocoder fails.
-* Image Capture and Prediction
+* **Geocoder**: Fetches location data using IP.
+* **ipapi.co**: A fallback method in case Geocoder fails.
+
+4. Image Capture and Prediction
+
 * Users can capture images of water bottles via a webcam.
 * YOLO-based predictions are run on the captured image to detect the bottles and categorize them.
 * The results are displayed along with metadata in the app interface.
