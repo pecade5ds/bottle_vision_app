@@ -172,8 +172,5 @@ import json
 # Acceder a las credenciales desde los secretos
 firebase_credentials = st.secrets["firebase_credentials"]
 
-# Usar las credenciales para conectar a Firestore
-db = firestore.Client.from_service_account_info(firebase_credentials)
-
 # Usar el cliente de Firestore
-st.write("Conexión a Firestore exitosa!")
+st.write(f"Conexión a Firestore exitosa!{type(firebase_credentials)}")
