@@ -102,7 +102,9 @@ def main():
     if picture:
         st.success("Photo ready for processing!")
         st.write(f"{type(picture)}")
-        picture = picture.read()
+        picture = picture.read() # Byte data returned from the read method
+        st.write(f"{type(picture)}")
+        st.write(f"{type(Image.open(picture)}") # converted back to a format compatible with PIL.Image.open()
         st.write(f"{type(picture)}")
 
         # Predict using YOLO model
