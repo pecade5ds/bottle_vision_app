@@ -108,15 +108,16 @@ def main():
         st.write(f"{type(picture)}")
 
         # Predict using YOLO model
-        roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(picture)) , confidence=50, overlap=30)
-        robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
+        #################################
+        # roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(picture)) , confidence=50, overlap=30)
+        # robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
-        # Base model for Bottle detection (denominator for ocmputing "Water store share")
+        # Base model for Bottle detection (denominator for computing "Water store share")
+        #################################
         model = YOLO('yolov8n.pt')  
         
-        # Predict just on bottles
-        
-        bottles_pred = model.predict(picture,
+        # Predict just on bottles        
+        bottles_pred = model.predict(Image.open(io.BytesIO(byte_data)),
                                 classes=[39],  # ID "bottle" class
                                 conf=0.5)
         
