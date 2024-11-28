@@ -111,7 +111,7 @@ def main():
         
         # Predict just on bottles
         st.write(f"{type(picture)}")
-        bottles_pred = model.predict(Image.open(BytesIO(picture.getvalue()),
+        bottles_pred = model.predict(Image.open(BytesIO(picture.getvalue())),
                                 classes=[39],  # ID "bottle" class
                                 conf=0.5)
         
