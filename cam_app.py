@@ -91,7 +91,7 @@ def main():
         
     elif mode == "Upload a Photo":
         # Widget to upload a photo
-        picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"]).read(
+        picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"]).read()
 
     st.markdown(
         """<hr style="border: 1px solid #d3d3d3;"/>""", 
