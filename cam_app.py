@@ -161,7 +161,7 @@ def main():
             store_type = st.selectbox("Select Store Type", ["TT", "OT"], key="store_type", index=1)
 
         with col5:
-            photo_type = st.selectbox("Select Store Type", ["Test", "Prod"], key="foto_type", index=1) # This is when testing the app to filter garbage
+            photo_type = st.selectbox("Select Store Type", ["Test", "Prod"], key="foto_type", index=0) # This is when testing the app to filter garbage
 
         if st.button("Save Predictions"):
             try:
