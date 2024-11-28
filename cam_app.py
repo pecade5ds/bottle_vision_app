@@ -87,7 +87,7 @@ def main():
         enable_camera = st.checkbox("Enable Camera")
 
         # Widget to capture the photo
-        picture = st.camera_input("Take a photo", disabled=not enable_camera)
+        picture = Image.open(st.camera_input("Take a photo", disabled=not enable_camera).read())
 
     elif mode == "Upload a Photo":
         # Widget to upload a photo
@@ -111,7 +111,7 @@ def main():
         
         # Predict just on bottles
         st.write(f"{type(picture)}")
-        bottles_pred = model.predict(Image.open(picture.getvalue()),
+        bottles_pred = model.predict(picture,
                                 classes=[39],  # ID "bottle" class
                                 conf=0.5)
         
