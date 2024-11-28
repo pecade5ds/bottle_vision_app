@@ -29,8 +29,6 @@ yolo_models_dict = {
 
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
-    # Custom horizontal divider
-    # Custom horizontal divider
     st.markdown(
         """
         <style>
@@ -43,13 +41,13 @@ def main():
             border-radius: 10px;
             padding: 15px;
             background-color: #F8F8F8;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 20px;
         }
         .toggle-button {
             display: inline-flex;
-            align-items: center;
-            justify-content: center;
             gap: 10px;
         }
         .toggle-button div {
@@ -83,16 +81,28 @@ def main():
         # Retrieve current mode
         mode = st.session_state.get("mode", "Take a Photo")
 
+        # Button container
+        st.markdown('<div class="toggle-button">', unsafe_allow_html=True)
+
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("📸 Take a Photo", key="take_photo", on_click=lambda: st.session_state.update({"mode": "Take a Photo"})):
+            if st.button(
+                "📸 Take a Photo",
+                key="take_photo",
+                on_click=lambda: st.session_state.update({"mode": "Take a Photo"}),
+            ):
                 mode = "Take a Photo"
 
         with col2:
-            if st.button("📂 Upload a Photo", key="upload_photo", on_click=lambda: st.session_state.update({"mode": "Upload a Photo"})):
+            if st.button(
+                "📂 Upload a Photo",
+                key="upload_photo",
+                on_click=lambda: st.session_state.update({"mode": "Upload a Photo"}),
+            ):
                 mode = "Upload a Photo"
 
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)  # End of toggle-button div
+        st.markdown('</div>', unsafe_allow_html=True)  # End of toggle-container div
 
     # Initialize variables
     picture = None
@@ -107,7 +117,7 @@ def main():
     elif mode == "Upload a Photo":
         # Widget to upload a photo
         picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
-
+        
     # Display the captured photo if available
     if picture:
         st.success("Photo ready for processing!")
