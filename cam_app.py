@@ -110,6 +110,7 @@ def main():
         model = YOLO('yolov8n.pt')  
         
         # Predict just on bottles
+        st.write(f"{type(picture)}")
         bottles_pred = model.predict(picture,
                                 classes=[39],  # ID "bottle" class
                                 conf=0.5)
