@@ -103,7 +103,6 @@ def main():
     if picture:
         st.success("Photo ready for processing!")
         byte_data = picture.read() # Byte data returned from the read method
-        st.write(f"{type(picture)}")
 
         # Base model for Bottle detection (denominator for computing "Water store share")
         #################################
@@ -121,7 +120,6 @@ def main():
         image = Image.open(picture)
         image.save("uploaded_image.jpg")
         roboflow_result = yolo_models_dict["roboflow_model"].predict("uploaded_image.jpg" , confidence=50, overlap=30)
-        st.write(roboflow_result)
         
         # roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(io.BytesIO(byte_data))) , confidence=50, overlap=30)
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
