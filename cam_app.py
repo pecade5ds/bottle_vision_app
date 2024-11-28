@@ -30,6 +30,7 @@ yolo_models_dict = {
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
     # Custom horizontal divider
+     # Custom horizontal divider
     st.markdown(
         """
         <style>
@@ -37,16 +38,28 @@ def main():
             border: 2px solid #FF6347;
             border-radius: 5px;
         }
+        .horizontal-radio .stRadio > label {
+            display: flex;
+            justify-content: center;
+        }
+        .horizontal-radio .stRadio div {
+            display: flex;
+            gap: 10px;
+            flex-direction: row;
+        }
         </style>
         """, 
         unsafe_allow_html=True
     )
     
-    # Example of using a custom divider
+    # Divider
     st.markdown("---")
 
-    # Radio button to switch between modes
-    mode = st.radio("Select mode:", ["Take a Photo", "Upload a Photo"])
+    # Horizontal Radio Button
+    with st.container():
+        st.markdown('<div class="horizontal-radio">', unsafe_allow_html=True)
+        mode = st.radio("Select mode:", ["Take a Photo", "Upload a Photo"], key="select_mode")
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # Initialize variables
     picture = None
