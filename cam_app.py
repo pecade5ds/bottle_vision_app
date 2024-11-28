@@ -80,7 +80,7 @@ def main():
         denominator_results = filter_and_count(bottles_pred[0].summary(), threshold=0.5, class_var="name")["bottle"]
 
         with st.spinner("Retrieving your location..."):
-            lat, lon = get_location()
+            lat, lon = get_location(st)
         
         st.write(f"{(lat, lon)}")
         st.markdown("---")
