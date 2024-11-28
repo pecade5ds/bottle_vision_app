@@ -77,11 +77,6 @@ def main():
     with col2:
         if st.button("📂 Upload a Photo", key="upload_photo", on_click=lambda: st.session_state.update({"mode": "Upload a Photo"})):
             mode = "Upload a Photo"
-
-    st.markdown(
-        """<hr style="border: 1px solid #d3d3d3;"/>""", 
-        unsafe_allow_html=True
-    )
     
     # Initialize variables
     picture = None
@@ -96,6 +91,11 @@ def main():
     elif mode == "Upload a Photo":
         # Widget to upload a photo
         picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
+
+    st.markdown(
+        """<hr style="border: 1px solid #d3d3d3;"/>""", 
+        unsafe_allow_html=True
+    )
     
     # Display the captured photo if available
     if picture:
