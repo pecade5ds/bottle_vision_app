@@ -9,6 +9,14 @@ def filter_and_count(data, threshold=0.5, class_var="class"):
         result[class_name] = result.get(class_name, 0) + 1
     return result
 
+def convert_image_to_base64(photo) -> str:
+    image = Image.open(BytesIO(photo.getvalue()))  # Convertir UploadedFile a PIL.Image
+    
+
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")  
+    photo_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+    return photo_base64
 
 def get_location_geocoder() -> Tuple[Optional[float], Optional[float]]:
     """
