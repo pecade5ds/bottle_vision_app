@@ -93,17 +93,9 @@ def main():
         picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
     
     st.markdown(
-    """
-    <style>
-    .custom-divider {
-        border: none;
-        border-top: 1px solid #d3d3d3; /* Light gray color */
-        margin: 20px 0; /* Adjust margin for spacing */
-    }
-    </style>
-    <hr class="custom-divider">
-    """,
-    unsafe_allow_html=True)
+        """<hr style="border: 1px solid #d3d3d3;"/>""", 
+        unsafe_allow_html=True
+    )
     
     # Display the captured photo if available
     if picture:
