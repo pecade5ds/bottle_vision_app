@@ -118,7 +118,14 @@ def main():
                                 classes=[39],  # ID "bottle" class
                                 conf=0.5)
         
-        denominator_results = filter_and_count(bottles_pred[0].summary(), threshold=0.5, class_var="name")["bottle"]
+        denominator_results = filter_and_count(bottles_pred[0].summary(), threshold=0.5, class_var="name").get("bottle")
+
+        # To have coherence among total bottles and danone predicted.
+        if not denominator_results:
+            if not robo_detected_label_counts_dict:
+                denominator_results = 0
+            else:
+                denominator_results = sum(robo_detected_label_counts_dict.values())
 
         # with st.spinner("Retrieving your location..."):
         #     lat, lon = get_location(st)
