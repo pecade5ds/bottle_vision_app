@@ -120,7 +120,7 @@ def main():
         #################################
         image = Image.open(picture)
         image.save("uploaded_image.jpg")
-        roboflow_result = yolo_models_dict["roboflow_model"].predict("uploaded_image.jpg , confidence=50, overlap=30)
+        roboflow_result = yolo_models_dict["roboflow_model"].predict("uploaded_image.jpg" , confidence=50, overlap=30)
         
         # roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(io.BytesIO(byte_data))) , confidence=50, overlap=30)
         
