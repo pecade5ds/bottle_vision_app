@@ -101,12 +101,9 @@ def main():
     # Display the captured photo if available
     if picture:
         st.success("Photo ready for processing!")
-        st.write(f"{type(picture)}")
         picture = picture.read() # Byte data returned from the read method
         st.write(f"{type(picture)}")
-        st.write(f"{type(Image.open(picture))}") # converted back to a format compatible with PIL.Image.open()
-        st.write(f"{type(picture)}")
-
+        
         # Predict using YOLO model
         #################################
         roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(picture)) , confidence=50, overlap=30)
