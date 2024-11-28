@@ -37,8 +37,26 @@ def main():
             border: 2px solid #FF6347;
             border-radius: 5px;
         }
-        .slider-switch .stSlider > label {
-            display: none;
+        .toggle-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .toggle-button div {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #FF6347;
+            color: white;
+            border-radius: 25px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .toggle-button div:hover {
+            background-color: #FF4500;
+        }
+        .selected {
+            background-color: #32CD32 !important;
         }
         </style>
         """,
@@ -48,18 +66,19 @@ def main():
     # Divider
     st.markdown("---")
 
-    # Toggle Switch using select_slider
-    with st.container():
-        st.markdown('<div class="slider-switch">', unsafe_allow_html=True)
-        mode = st.select_slider(
-            "Select mode:",
-            options=["Take a Photo", "Upload a Photo"],
-            value="Take a Photo",
-            format_func=lambda x: "📸" if x == "Take a Photo" else "📂",
-        )
-        st.markdown('</div>', unsafe_allow_html=True)
+    # Toggle Button
+    mode = st.session_state.get("mode", "Take a Photo")
+    col1, col2 = st.columns(2)
 
-    st.write(f"**Mode Selected**: {mode}")
+    with col1:
+        if st.button("📸 Take a Photo", key="take_photo", on_click=lambda: st.session_state.update({"mode": "Take a Photo"})):
+            mode = "Take a Photo"
+    
+    with col2:
+        if st.button("📂 Upload a Photo", key="upload_photo", on_click=lambda: st.session_state.update({"mode": "Upload a Photo"})):
+            mode = "Upload a Photo"
+
+    st.write(f"**Selected Mode:** {mode}")
 
     # Initialize variables
     picture = None
@@ -70,7 +89,7 @@ def main():
 
         # Widget to capture the photo
         picture = st.camera_input("Take a photo", disabled=not enable_camera)
-    
+
     elif mode == "Upload a Photo":
         # Widget to upload a photo
         picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
