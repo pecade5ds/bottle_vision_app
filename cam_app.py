@@ -1,12 +1,10 @@
 import streamlit as st
-import requests
 from typing import Optional, Tuple
 import firebase_admin
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
 import base64
 import json
-import geocoder
 import numpy as np
 from PIL import Image
 from roboflow import Roboflow
