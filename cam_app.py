@@ -3,13 +3,14 @@ from typing import Optional, Tuple
 import firebase_admin
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
+from ultralytics import YOLO
 import json
 import numpy as np
 from PIL import Image
 from roboflow import Roboflow
 from google.cloud import firestore
 from utils import *
-import YOLO
+
 
 # Firebase credentials
 db = firestore.Client.from_service_account_info(st.secrets["firebase"])
