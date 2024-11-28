@@ -53,6 +53,6 @@ def get_location(st) -> Tuple[Optional[float], Optional[float]]:
     # If geocoder fails, try ipapi
     if lat is None:
         st.info("Primary geolocation method unsuccessful, trying alternative...")
-        lat, lon = get_location_ipapi()
+        lat, lon = get_location_ipapi(st)
     
     return lat, lon
