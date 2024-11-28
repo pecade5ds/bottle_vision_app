@@ -45,11 +45,22 @@ def main():
     # Example of using a custom divider
     st.markdown("---")
 
-    # Option to enable or disable the camera
-    enable_camera = st.checkbox("Enable Camera")
+    # Radio button to switch between modes
+    mode = st.radio("Select mode:", ["Take a Photo", "Upload a Photo"])
 
-    # Widget to capture the photo
-    picture = st.camera_input("Take a photo", disabled=not enable_camera)
+    # Initialize variables
+    picture = None
+
+    if mode == "Take a Photo":
+        # Option to enable or disable the camera
+        enable_camera = st.checkbox("Enable Camera")
+
+        # Widget to capture the photo
+        picture = st.camera_input("Take a photo", disabled=not enable_camera)
+    
+    elif mode == "Upload a Photo":
+        # Widget to upload a photo
+        picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
 
     # Display the captured photo if available
     if picture:
