@@ -88,9 +88,10 @@ def main():
 
         # Widget to capture the photo
         picture = st.camera_input("Take a photo", disabled=not enable_camera)
+        
     elif mode == "Upload a Photo":
         # Widget to upload a photo
-        picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
+        picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"]).read(
 
     st.markdown(
         """<hr style="border: 1px solid #d3d3d3;"/>""", 
