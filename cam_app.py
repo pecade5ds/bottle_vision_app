@@ -11,6 +11,7 @@ from PIL import Image
 from roboflow import Roboflow
 from google.cloud import firestore
 from utils import *
+import pandas as pd
 
 # Firebase credentials
 db = firestore.Client.from_service_account_info(st.secrets["firebase"])
