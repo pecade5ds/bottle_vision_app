@@ -3,7 +3,6 @@ from typing import Optional, Tuple
 import firebase_admin
 from firebase_admin import credentials, initialize_app, firestore
 from io import BytesIO
-import base64
 import json
 import numpy as np
 from PIL import Image
