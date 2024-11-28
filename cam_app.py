@@ -30,7 +30,6 @@ yolo_models_dict = {
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
     # Custom horizontal divider
-     # Custom horizontal divider
     st.markdown(
         """
         <style>
@@ -38,28 +37,29 @@ def main():
             border: 2px solid #FF6347;
             border-radius: 5px;
         }
-        .horizontal-radio .stRadio > label {
-            display: flex;
-            justify-content: center;
-        }
-        .horizontal-radio .stRadio div {
-            display: flex;
-            gap: 10px;
-            flex-direction: row;
+        .slider-switch .stSlider > label {
+            display: none;
         }
         </style>
-        """, 
-        unsafe_allow_html=True
+        """,
+        unsafe_allow_html=True,
     )
-    
+
     # Divider
     st.markdown("---")
 
-    # Horizontal Radio Button
+    # Toggle Switch using select_slider
     with st.container():
-        st.markdown('<div class="horizontal-radio">', unsafe_allow_html=True)
-        mode = st.radio("Select mode:", ["Take a Photo", "Upload a Photo"], key="select_mode")
+        st.markdown('<div class="slider-switch">', unsafe_allow_html=True)
+        mode = st.select_slider(
+            "Select mode:",
+            options=["Take a Photo", "Upload a Photo"],
+            value="Take a Photo",
+            format_func=lambda x: "📸" if x == "Take a Photo" else "📂",
+        )
         st.markdown('</div>', unsafe_allow_html=True)
+
+    st.write(f"**Mode Selected**: {mode}")
 
     # Initialize variables
     picture = None
