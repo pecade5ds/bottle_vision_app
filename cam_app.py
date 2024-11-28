@@ -87,8 +87,7 @@ def main():
         enable_camera = st.checkbox("Enable Camera")
 
         # Widget to capture the photo
-        picture = st.camera_input("Take a photo", disabled=not enable_camera).read()
-
+        picture = st.camera_input("Take a photo", disabled=not enable_camera)
     elif mode == "Upload a Photo":
         # Widget to upload a photo
         picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
