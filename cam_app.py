@@ -30,6 +30,7 @@ yolo_models_dict = {
 def main():
     st.title("Danone - Waters Bottle Vision 📸")
     # Custom horizontal divider
+    # Custom horizontal divider
     st.markdown(
         """
         <style>
@@ -37,8 +38,16 @@ def main():
             border: 2px solid #FF6347;
             border-radius: 5px;
         }
+        .toggle-container {
+            border: 2px solid #FF6347;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #F8F8F8;
+            text-align: center;
+            margin-bottom: 20px;
+        }
         .toggle-button {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
@@ -50,10 +59,11 @@ def main():
             color: white;
             border-radius: 25px;
             text-align: center;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .toggle-button div:hover {
             background-color: #FF4500;
+            transform: scale(1.05);
         }
         .selected {
             background-color: #32CD32 !important;
@@ -66,19 +76,23 @@ def main():
     # Divider
     st.markdown("---")
 
-    # Toggle Button
-    mode = st.session_state.get("mode", "Take a Photo")
-    col1, col2 = st.columns(2)
+    # Toggle Button inside a box
+    with st.container():
+        st.markdown('<div class="toggle-container">', unsafe_allow_html=True)
 
-    with col1:
-        if st.button("📸 Take a Photo", key="take_photo", on_click=lambda: st.session_state.update({"mode": "Take a Photo"})):
-            mode = "Take a Photo"
-    
-    with col2:
-        if st.button("📂 Upload a Photo", key="upload_photo", on_click=lambda: st.session_state.update({"mode": "Upload a Photo"})):
-            mode = "Upload a Photo"
+        # Retrieve current mode
+        mode = st.session_state.get("mode", "Take a Photo")
 
-    st.write(f"**Selected Mode:** {mode}")
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("📸 Take a Photo", key="take_photo", on_click=lambda: st.session_state.update({"mode": "Take a Photo"})):
+                mode = "Take a Photo"
+
+        with col2:
+            if st.button("📂 Upload a Photo", key="upload_photo", on_click=lambda: st.session_state.update({"mode": "Upload a Photo"})):
+                mode = "Upload a Photo"
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # Initialize variables
     picture = None
@@ -96,7 +110,7 @@ def main():
 
     # Display the captured photo if available
     if picture:
-        st.success("Photo captured successfully!")
+        st.success("Photo ready for processing!")
 
         # Predict using YOLO model
         roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(BytesIO(picture.getvalue()))) , confidence=50, overlap=30)
