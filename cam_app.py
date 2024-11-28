@@ -104,11 +104,6 @@ def main():
         st.success("Photo ready for processing!")
         byte_data = picture.read() # Byte data returned from the read method
         st.write(f"{type(picture)}")
-        
-        # Predict using YOLO model
-        #################################
-        # roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(io.BytesIO(byte_data))) , confidence=50, overlap=30)
-        # robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         # Base model for Bottle detection (denominator for computing "Water store share")
         #################################
@@ -120,6 +115,11 @@ def main():
                                 conf=0.5)
         
         denominator_results = filter_and_count(bottles_pred[0].summary(), threshold=0.5, class_var="name").get("bottle")
+        
+        # Predict using YOLO model
+        #################################
+        roboflow_result = yolo_models_dict["roboflow_model"].predict(np.array(Image.open(io.BytesIO(byte_data))) , confidence=50, overlap=30)
+        robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         # To have coherence among total bottles and danone predicted.
         if not denominator_results:
