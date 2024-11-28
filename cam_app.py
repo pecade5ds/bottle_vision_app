@@ -87,11 +87,11 @@ def main():
         enable_camera = st.checkbox("Enable Camera")
 
         # Widget to capture the photo
-        picture = st.camera_input("Take a photo", disabled=not enable_camera).read()
+        picture = st.camera_input("Take a photo", disabled=not enable_camera)
         
     elif mode == "Upload a Photo":
         # Widget to upload a photo
-        picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"]).read()
+        picture = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
 
     st.markdown(
         """<hr style="border: 1px solid #d3d3d3;"/>""", 
@@ -101,7 +101,8 @@ def main():
     # Display the captured photo if available
     if picture:
         st.success("Photo ready for processing!")
-
+        st.write(f"{type(picture)}")
+        picture = picture.read()
         st.write(f"{type(picture)}")
 
         # Predict using YOLO model
