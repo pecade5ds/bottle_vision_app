@@ -43,7 +43,7 @@ def get_location_ipapi(st) -> Tuple[Optional[float], Optional[float]]:
         st.error(f"Error retrieving location from ipapi.co: {str(e)}")
     return None, None
 
-def get_location() -> Tuple[Optional[float], Optional[float]]:
+def get_location(st) -> Tuple[Optional[float], Optional[float]]:
     """
     Tries to get location first using geocoder, then falls back to ipapi.co
     """
