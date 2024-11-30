@@ -118,11 +118,11 @@ def main():
         
         # Predict using YOLO model
         #################################
+        image_saved_name = "uploaded_image.jpg"
         image = Image.open(picture)
-
         image = image.convert("RGB")
-        image.save("uploaded_image.jpg")
-        roboflow_result = yolo_models_dict["roboflow_model"].predict("uploaded_image.png" , confidence=40, overlap=20)
+        image.save(image_saved_name)
+        roboflow_result = yolo_models_dict["roboflow_model"].predict(image_saved_name, confidence=40, overlap=20)
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
         # To have coherence among total bottles and danone predicted.
