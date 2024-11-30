@@ -119,7 +119,9 @@ def main():
         # Predict using YOLO model
         #################################
         image = Image.open(picture)
-        image.save("uploaded_image.png")
+
+        image = image.convert("RGB")
+        image.save("uploaded_image.jpg")
         roboflow_result = yolo_models_dict["roboflow_model"].predict("uploaded_image.png" , confidence=40, overlap=20)
         robo_detected_label_counts_dict = filter_and_count(roboflow_result.json()["predictions"], threshold=0.5, class_var="class")
 
