@@ -31,7 +31,7 @@ yolo_models_dict = {
 }
 
 def main():
-    st.title("Danone - Waters Bottle Vision 📸")
+    st.title("Retail Waters Bottle Vision 📸")
     # Custom horizontal divider
     st.markdown(
         """
