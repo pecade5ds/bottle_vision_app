@@ -3,7 +3,6 @@ from typing import Optional, Tuple
 import firebase_admin
 from firebase_admin import credentials, initialize_app, firestore
 import io
-from io import BytesIO
 from ultralytics import YOLO
 import json
 import numpy as np
